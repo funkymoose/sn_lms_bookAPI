@@ -6,9 +6,9 @@ app = FastAPI()
 # cache = {}
 
 @app.get("/book/{isbn}")
-def get_book(isbn: str, API_KEY: str = Header(None)):
+def get_book(isbn: str, x_google_api_key: str = Header(None)):
 
-    if not API_KEY:
+    if not x_google_api_key:
         raise HTTPException(
             status_code=400,
             detail="Missing Google API Key"
@@ -17,7 +17,7 @@ def get_book(isbn: str, API_KEY: str = Header(None)):
     # url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
 
 
-    url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={API_KEY}"
+    url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={x_google_api_key}"
 
     response = requests.get(url, timeout=20)
 
