@@ -3,20 +3,19 @@ import requests
 
 app = FastAPI()
 
-cache = {}
+# cache = {}
 
 @app.get("/book/{isbn}")
 def get_book(isbn: str, API_KEY: str):
 
-    # CACHE CHECK
-    if isbn in cache:
-        return {
-            "source": "cache",
-            "data": cache[isbn]
-        }
+    if not API_KEY:
+        raise HTTPException(
+            status_code=400,
+            detail="Missing Google API Key"
+        )
 
     # url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
-    # API_KEY = "AIzaSyDJRAGgnzYI2NZTwVV6_ttuuirReke90yo"
+
 
     url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}&key={API_KEY}"
 
