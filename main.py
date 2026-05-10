@@ -52,7 +52,7 @@ def get_book(isbn: str, API_KEY: str):
     }
 
     # SAVE TO CACHE
-    cache[isbn] = result
+    # cache[isbn] = result
 
     return {
         "source": "google",
