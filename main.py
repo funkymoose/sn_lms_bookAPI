@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 import requests
 
 app = FastAPI()
@@ -6,7 +6,7 @@ app = FastAPI()
 # cache = {}
 
 @app.get("/book/{isbn}")
-def get_book(isbn: str, API_KEY: str):
+def get_book(isbn: str, API_KEY: str = Header(None)):
 
     if not API_KEY:
         raise HTTPException(
